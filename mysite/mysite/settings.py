@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 # AUTH_USER_MODEL = 'userprofile.User'
 
 MIDDLEWARE = [
+
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
