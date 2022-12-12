@@ -1,0 +1,63 @@
+{% extends 'requestApp/base.html' %}
+{% block content %}
+
+<table>
+    <thead>
+    <tr>
+        <th>Дата заявки<br>Автор</th>
+        <th>Сума <br>(грн)</th>
+        <th>Заявка</th>
+        <th>Дата оплати<br>Отримувач</th>
+        <th>Статус</th>
+
+    </tr>
+    </thead>
+
+    {% for p in reqs %}
+    <tr class="req-row" ondblclick="window.location.href = '{%  url 'req-update' p.id %}'">
+        <td сlass="date-col">
+            <div>
+                <h4>{{p.req_date|date:"d.m.Y G:i" }} </h4>
+                <p>{{p.user}}</p>
+            </div>
+        </td>
+        <td class="sum-col"><h3>{{p.sum}} </h3></td>
+        <td>
+            <div class="target-col"> {{p.target|linebreaksbr}}</div>
+        </td>
+        <td><p>{{p.pay_date|date:"d.m.Y" }}<br>{{p.receiver}}</p></td>
+        <td class="status-col">
+            {% if p.is_agreed %}
+            <p> Підписано на оплату
+            {% elif p.is_ready %}
+            <p style="color:red;"> Очікує на підпис
+            {%else%}
+            <p style="color:blue;"> Редагується
+            {% endif %}
+            </p>
+        </td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+<div class="pagination">
+    <span class="step-links" style="font-size:18px">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; Перша</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Попередня</a>
+        {% endif %}
+
+        <span class="current">
+            Сторінка {{ page_obj.number }} із {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Наступна</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Остання &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+{% endblock %}

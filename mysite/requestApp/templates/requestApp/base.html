@@ -1,0 +1,96 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <link type="text/css" href="{% static 'requestApp/css/styles.css' %}" rel="stylesheet"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="shortcut icon" href="{% static 'requestApp/images/main.ico' %}" type="image/x-icon"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+</head>
+<body>
+<table class="table-page" border=0 cellpadding="0" cellspacing="0">
+    <tr>
+        <td valign=top>
+            {% block mainmenu %}
+            <div class="header">
+                <div class="clear">
+                    {% if request.user.is_authenticated %}
+                    <li>
+                        <div class="user"><a href="{% url 'logout' %}">{{request.user|title}}   |   Вийти</a></div>
+                    </li>
+                    {%endif%}
+                </div>
+            </div>
+            {% endblock mainmenu %}
+
+            <table class="table-content">
+                <tr>
+                    <!-- Sidebar слева -->
+                    <td valign="top" class="left-chapters">
+                        <ul id="leftchapters">
+                            {% if request.user.is_authenticated %}
+                            <li class="btn active">
+                                <fieldset>
+                                    <legend>Показати список заявок:</legend>
+                                    <br>
+                                    <div><a href="{% url 'req-list'   %}">Показати всі</a></div>
+                                    <br>
+                                    <div><a href="{% url 'req-list'   %}?signed=False">Тільки не підписані</a></div>
+                                </fieldset>
+                            </li>
+                            <br>
+
+
+                            <li class="btn"><a href="{% url 'req-create' %}">Створити нову заявку</a></li>
+                            {% endif %}
+                        </ul>
+
+                    </td>
+                    <!-- Конец Sidebar'а -->
+                    <td valign="top" class="content">
+                        <!-- Блок контента -->
+                        <div class="content-text">
+                            {% block content %}
+                            {% endblock %}
+                        </div>
+                        <!-- Конец блока контента -->
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <!-- Footer -->
+    <tr>
+        <td valign=top>
+            <div id="footer">
+                <p>&copy; Created by ThorSci.UA </p>
+            </div>
+        </td>
+    </tr>
+</table>
+<!-- Конец footer'а и страницы -->
+
+
+<script>
+// Add active class to the current button (highlight it)
+var header = document.getElementById("leftchapters");
+var btns = header.getElementsByClassName("btn");
+for (var i = 0; i < btns.length; i++) {
+  btns[i].addEventListener("click", function() {
+    var current = document.getElementsByClassName("active");
+    current[0].className = current[0].className.replace(" active", "");
+    this.className += " active";
+  });
+}
+
+
+
+
+
+</script>
+</body>
+</html>
