@@ -7,7 +7,7 @@ from django.http import request
 class ReqUpdateForm(ModelForm):
     class Meta:
         model = Req
-        fields = ['pay_date', 'target', 'sum', 'receiver', 'is_ready', 'photo_doc', 'info_text']
+        fields = ['pay_date', 'target', 'sum', 'receiver', 'is_ready', 'info_text']
 
         fields += ['is_agreed', ]
 
