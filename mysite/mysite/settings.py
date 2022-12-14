@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-rn_55y#+oif9=1rfazl&+55nq%@nwe@f3kwu@7!ra8*jcnndzc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.101', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.1.101', 'localhost', '127.0.0.1', 'thorw.pythonanywhere.com']
 
 # Application definition
 
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
 
     'django.middleware.security.SecurityMiddleware',
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    # "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 # 'whitenoise.middleware.WhiteNoiseMiddleware',
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 ROOT_URLCONF = 'mysite.urls'
 
@@ -80,12 +80,20 @@ TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ThorW$req',
+        'USER': 'ThorW',
+        'PASSWORD': '6Ubt!2iHJeW39jW',
+        'HOST': 'localhost',
+        # 'HOST': 'ThorW.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     }
 }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

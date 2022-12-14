@@ -38,8 +38,11 @@ class ReqList(LoginRequiredMixin, ListView):
 
         signed = self.request.GET.get('signed')
         if signed is None: signed = True
+        my_userprofile = UserProfile.objects.get(user=self.request.user)
+
 
         try:
+
             u = User.objects.get(id=self.request.user.id)
             user_role = u.userprofile.role
 
@@ -50,7 +53,7 @@ class ReqList(LoginRequiredMixin, ListView):
         except ObjectDoesNotExist:
             pass
 
-        my_userprofile = UserProfile.objects.get(user=self.request.user)
+
         return Req.objects.filter(
             (Q(user=self.request.user) | Q(user__userprofile__supervisor=my_userprofile))
             & (Q(is_agreed=False) | Q(is_agreed=signed)))
