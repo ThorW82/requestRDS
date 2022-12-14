@@ -33,7 +33,6 @@ class Req(models.Model):
     receiver = models.CharField(max_length=50, verbose_name='Отримувач')
     is_ready = models.BooleanField(default=False, verbose_name='Готово для підпису')
     is_agreed = models.BooleanField(default=False, verbose_name='Узгоджено')
-
     info_text = models.CharField(max_length=500, blank=True, verbose_name='Дод інфо')
 
     class Meta:

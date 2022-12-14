@@ -47,15 +47,13 @@ class ReqList(LoginRequiredMixin, ListView):
                 return Req.objects.filter(
                     (Q(user=self.request.user) | Q(is_ready=True))
                     & (Q(is_agreed=False) | Q(is_agreed=signed)))
-            else:
-                my_userprofile = UserProfile.objects.get(user=self.request.user)
-                return Req.objects.filter(
-                    (Q(user=self.request.user) | Q(user__userprofile__supervisor=my_userprofile))
-                    & (Q(is_agreed=False) | Q(is_agreed=signed)))
         except ObjectDoesNotExist:
             pass
-        return None
 
+        my_userprofile = UserProfile.objects.get(user=self.request.user)
+        return Req.objects.filter(
+            (Q(user=self.request.user) | Q(user__userprofile__supervisor=my_userprofile))
+            & (Q(is_agreed=False) | Q(is_agreed=signed)))
 
 
 class ReqCreate(LoginRequiredMixin, CreateView):
