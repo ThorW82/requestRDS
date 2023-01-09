@@ -11,7 +11,7 @@ class RequestAdmin(admin.ModelAdmin):
 
 
 class AgreedAdmin(admin.ModelAdmin):
-    mylist = ('req', 'date')
+    mylist = ('req','user',  'date')
     list_display = mylist
     list_display_links = mylist
 

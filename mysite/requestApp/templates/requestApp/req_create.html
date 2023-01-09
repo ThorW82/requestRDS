@@ -1,0 +1,27 @@
+{% extends 'requestApp/base.html' %}
+{% block content %}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <form method="POST" action="">
+<!--                    <a class="link-button"  href="{% url 'req-list' %}">&#8592; Повернутись до загального списку</a>-->
+                    {% csrf_token %}
+                    {{form_req.as_p}}
+                    <input class="link-button"  type="submit" value="Зберегти">
+                </form>
+
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!--{% endblock %}-->

@@ -1,0 +1,40 @@
+{% extends 'requestApp/base.html' %}
+{% block content %}
+
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <form method="POST" action="">
+                    <a class="link-button"  href="{% url 'req-list' %}">&#8592; Повернутись до загального списку</a>
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <input class="link-button"  type="submit" value="Зберегти">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+
+                    {%if messages %}
+                        <h5>Повідомлення по цій заявці:</h5>
+                        <table style = "width:30%; border:0; color:blue;">
+                            {%for m in messages %}
+                            <tr>
+                                <td><small>{{m.date|date:"d.m.Y G:i"}}: {{m.user}}:</small></td>
+                                <td>{{m.message_text}}</td>
+                            </tr>
+                            {%endfor%}
+                        </table>
+
+                    {%endif%}
+
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

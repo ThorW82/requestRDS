@@ -9,7 +9,7 @@ class Role(models.TextChoices):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     role = models.CharField(max_length=10, choices=Role.choices, default=None, blank=True, null=True,verbose_name='Роль')
     supervisor = models.ForeignKey("UserProfile", on_delete=models.CASCADE, verbose_name='Керівник', blank=True, default=None,
                                    null=True, related_name='supervisor_of')
@@ -25,3 +25,5 @@ class UserProfile(models.Model):
     class Meta:
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профили'
+
+

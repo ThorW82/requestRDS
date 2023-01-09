@@ -1,0 +1,27 @@
+{% extends 'requestApp/base.html' %}
+{% block title %}Заявка{% endblock title %}
+{% block content %}
+
+<p>Заявка №  {{req.req_code}}</p>
+{{req.id}}
+<table>
+    <tbody>
+        <tr>
+            <td>
+
+                <form method="POST" action="">
+<!--                    <a class="link-button"  href="{% url 'req-list' %}">&#8592; Повернутись до загального списку</a>-->
+                    {% if req.user == request.user %}
+                        <a class="link-button" href=" {% url 'req-delete' req.id %} ">&#8592; Видалити заявкуРДС</a>
+                    {% endif %}
+                    {% csrf_token %}
+                    {{form_req.as_p}}
+                    <input class="link-button"  type="submit" value="Зберегти">
+                </form>
+            </td>
+
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

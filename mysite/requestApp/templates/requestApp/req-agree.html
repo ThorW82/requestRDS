@@ -1,9 +1,20 @@
 {% extends 'requestApp/base.html' %}
 {% block content %}
-<form method="POST" action="">
+
+
+
+
+
+<form method="POST" action ="">
     {%csrf_token%}
     {{form.as_p}}
-    <input class="button" type="submit" value="Погодити заявку на оплату">
+    <p>{{req.req_date}}</p>
+    <p>{{req.user}}</p>
+    <p>{{req.target}}</p>
+    <h4>{{req.sum}}</h4>
+    <p>{{req.receiver}}</p>
+    <p>{{req.pay_date}}</p>
+    <input class="button" type="submit" value="Зати згоду на оплату заявки">
 </form>
 
 {% endblock%}

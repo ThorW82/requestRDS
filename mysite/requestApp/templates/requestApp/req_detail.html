@@ -1,0 +1,72 @@
+{% extends 'requestApp/base.html' %}
+{% block content %}
+
+
+<!--<a class="link-button" href="{% url 'req-list' %}">&#8592; Повернутись до загального списку</a>-->
+{% if not is_agreed %}
+            <a class="link-button" href="{% url 'agreed-add' req.id %}">Підписати заявку</a>
+{% endif%}
+
+<table>
+    <tbody>
+    <tr>
+        <td>
+            <p></p>
+    <tr><td>код заявки:</td><td>{{req.req_code}}</td></tr>
+    <tr><td>автор:</td><td>{{req.user}}</td></tr>
+    <tr><td>дата:</td><td>{{req.req_date}}</td></tr>
+    <tr><td>дата оплати</td><td>{{req.pay_date}}</td></tr>
+    <tr><td>ціль</td><td>{{req.target}}</td></tr>
+    <tr><td>сума (грн)</td><td>{{req.sum}}</tr>
+    <tr><td>отримувач</td><td>{{req.receiver}}</td></tr>
+    <tr><td>готово?</td><td>{{req.is_ready}}</td></tr>
+    <tr><td>документи</td><td>{{req.doc}}</tr></td>
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+        <td></td>
+        <td>
+
+
+            <form method="POST" action="{% url 'message-create' req.id %}">
+                {% csrf_token %}
+                {{form_add_message.as_p}}
+                <input class="link-button" type="submit" value="Залишити повідомлення">
+
+
+            </form>
+            <hr>
+
+            {%if messages %}
+            <h5>Повідомлення по цій заявці:</h5>
+            <table style="width:30%; border:0; color:blue;">
+                {%for m in messages %}
+                <tr>
+                    {% if m.message_text == "(ПІДПИСАНО)" %}
+                        <p class="signed-message">
+                    {% elif m.user == request.user %}
+                        <p class="my-message">
+                    {%else%}
+                        <p>
+                    {% endif%}
+                        <small>{{m.date|date:"d.m.Y G:i"}}: {{m.user}}:</small>
+                    {{m.message_text}}</p>
+                </tr>
+                {%endfor%}
+            </table>
+
+            {%endif%}
+
+        </td>
+        <td>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+{% endblock %}

@@ -6,7 +6,7 @@
     <title>{{title}}</title>
     <link type="text/css" href="{% static 'requestApp/css/styles.css' %}" rel="stylesheet"/>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="shortcut icon" href="{% static 'requestApp/images/main.ico' %}" type="image/x-icon"/>
+    <link rel="shortcut icon" href="{% static 'requestApp/images/logo.png' %}" type="image/x-icon"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
@@ -19,9 +19,23 @@
             <div class="header">
                 <div class="clear">
                     {% if request.user.is_authenticated %}
-                    <li>
-                        <div class="user"><a href="{% url 'logout' %}">{{request.user|title}}   |   Вийти</a></div>
-                    </li>
+                    <nav>
+                        <ul id="menu-horiz">
+
+
+
+
+                            {% if title == 'Перелік заявок РДС' %}<li class="btn active">{%else%}<li class="btn">{% endif %}
+                                        <a href="{% url 'req-list'   %}">Перелік заявок</a></li>
+
+                            {% if title == 'Нова ЗаявкаРДС' %}<li class="btn active">{%else%}<li class="btn">{% endif %}
+                                        <a href="{% url 'req-create' %}">Створити нову заявку</a></li>
+
+<!--                            <li><a href="{% url 'req-list'   %}?signed=False">..не підписані</a></li>-->
+
+                            <li class="btn last"><a href="{% url 'logout' %}">{{request.user|title}}   |   Вийти</a></li>
+                        </ul>
+                    </nav>
                     {%endif%}
                 </div>
             </div>
@@ -32,21 +46,7 @@
                     <!-- Sidebar слева -->
                     <td valign="top" class="left-chapters">
                         <ul id="leftchapters">
-                            {% if request.user.is_authenticated %}
-                            <li class="btn active">
-                                <fieldset>
-                                    <legend>Показати список заявок:</legend>
-                                    <br>
-                                    <div><a href="{% url 'req-list'   %}">Показати всі</a></div>
-                                    <br>
-                                    <div><a href="{% url 'req-list'   %}?signed=False">Тільки не підписані</a></div>
-                                </fieldset>
-                            </li>
-                            <br>
 
-
-                            <li class="btn"><a href="{% url 'req-create' %}">Створити нову заявку</a></li>
-                            {% endif %}
                         </ul>
 
                     </td>
@@ -77,15 +77,15 @@
 
 <script>
 // Add active class to the current button (highlight it)
-var header = document.getElementById("leftchapters");
-var btns = header.getElementsByClassName("btn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-    var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
-}
+<!--var header = document.getElementById("leftchapters");-->
+<!--var btns = header.getElementsByClassName("btn");-->
+<!--for (var i = 0; i < btns.length; i++) {-->
+<!--  btns[i].addEventListener("click", function() {-->
+<!--    var current = document.getElementsByClassName("active");-->
+<!--    current[0].className = current[0].className.replace(" active", "");-->
+<!--    this.className += " active";-->
+<!--  });-->
+<!--}-->
 
 
 
